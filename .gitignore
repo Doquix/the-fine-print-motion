@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+episodes/*/final.mp4
+episodes/*/video.mp4
+episodes/*/seg_*.mp4
+episodes/*/segs.txt
+episodes/*/mix_raw.wav
+episodes/*/qc_sheet.png
+episodes/*/still_*.png
+*.wav
+/tmp/

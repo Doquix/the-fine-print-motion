@@ -1,0 +1,206 @@
+[
+{
+"s": 0.0,
+"e": 1.37,
+"t": "You tap withdraw.",
+"k": "withdraw"
+},
+{
+"s": 1.44,
+"e": 3.19,
+"t": "The job asks for a deposit.",
+"k": "deposit"
+},
+{
+"s": 3.3,
+"e": 5.1,
+"t": "It starts with a random message.",
+"k": "random message"
+},
+{
+"s": 5.15,
+"e": 6.35,
+"t": "Easy remote work,",
+"k": "Easy"
+},
+{
+"s": 6.45,
+"e": 7.65,
+"t": "flexible hours,",
+"k": "flexible"
+},
+{
+"s": 7.68,
+"e": 8.55,
+"t": "quick money.",
+"k": "quick money"
+},
+{
+"s": 8.63,
+"e": 9.43,
+"t": "Your assignment?",
+"k": "assignment"
+},
+{
+"s": 9.47,
+"e": 11.56,
+"t": "Rate products or boost listings.",
+"k": "boost"
+},
+{
+"s": 11.66,
+"e": 12.66,
+"t": "Just a few taps.",
+"k": "few taps"
+},
+{
+"s": 12.79,
+"e": 14.89,
+"t": "Each task makes your balance climb.",
+"k": "climb"
+},
+{
+"s": 15.0,
+"e": 16.0,
+"t": "Fifty dollars.",
+"k": "Fifty"
+},
+{
+"s": 16.12,
+"e": 16.72,
+"t": "A hundred.",
+"k": "hundred"
+},
+{
+"s": 16.9,
+"e": 17.6,
+"t": "Maybe more.",
+"k": "more"
+},
+{
+"s": 17.69,
+"e": 19.29,
+"t": "Sometimes they even send you",
+"k": ""
+},
+{
+"s": 19.29,
+"e": 20.19,
+"t": "a small payment",
+"k": "small payment"
+},
+{
+"s": 20.19,
+"e": 20.99,
+"t": "to build your trust.",
+"k": "trust"
+},
+{
+"s": 21.29,
+"e": 22.79,
+"t": "Then comes the catch.",
+"k": "catch"
+},
+{
+"s": 23.01,
+"e": 24.01,
+"t": "To withdraw your earnings,",
+"k": "withdraw"
+},
+{
+"s": 24.01,
+"e": 26.21,
+"t": "you have to deposit your own money.",
+"k": "your own money"
+},
+{
+"s": 26.38,
+"e": 28.08,
+"t": "Often, they want cryptocurrency.",
+"k": "cryptocurrency"
+},
+{
+"s": 28.34,
+"e": 28.84,
+"t": "You pay,",
+"k": "pay"
+},
+{
+"s": 29.04,
+"e": 30.74,
+"t": "expecting to get everything back.",
+"k": "everything back"
+},
+{
+"s": 31.01,
+"e": 32.11,
+"t": "The balance on the screen",
+"k": ""
+},
+{
+"s": 32.11,
+"e": 33.31,
+"t": "was never real.",
+"k": "never real"
+},
+{
+"s": 33.48,
+"e": 34.78,
+"t": "The only real money",
+"k": "real money"
+},
+{
+"s": 34.78,
+"e": 36.18,
+"t": "was the money you sent.",
+"k": "you sent"
+},
+{
+"s": 36.3,
+"e": 38.2,
+"t": "The Federal Trade Commission",
+"k": ""
+},
+{
+"s": 38.3,
+"e": 39.4,
+"t": "calls these task scams.",
+"k": "task scams"
+},
+{
+"s": 39.51,
+"e": 40.81,
+"t": "If a job asks for a deposit",
+"k": "deposit"
+},
+{
+"s": 40.81,
+"e": 42.31,
+"t": "to release your wages,",
+"k": ""
+},
+{
+"s": 42.51,
+"e": 43.11,
+"t": "stop.",
+"k": "stop"
+},
+{
+"s": 43.35,
+"e": 44.85,
+"t": "Never pay to get paid.",
+"k": ""
+},
+{
+"s": 45.13,
+"e": 46.13,
+"t": "The Fine Print.",
+"k": ""
+},
+{
+"s": 46.33,
+"e": 48.23,
+"t": "The hidden cost of everything.",
+"k": ""
+}
+]
