@@ -13,6 +13,21 @@ RED = (232, 68, 74); GREEN = (46, 190, 110); CARD = (247, 243, 236)
 DARKCARD = (25, 38, 68); WHITE = (255, 255, 255); NAVY = (12, 20, 40)
 GOLD = (240, 168, 40)
 
+# ---------------- audience profile ----------------
+# Chosen per episode with "profile" in beats.json. "calm" is for older viewers:
+# gentler camera, no glitch or motion blur, softer flashes, bigger captions,
+# and a mix with less music, fewer high frequency SFX and more voice.
+PROFILES = {
+    'standard': dict(drift=1.0, punch=1.0, shake=1.0, blur=1.0, flash=1.0, glitch=True, cap_size=52,
+                     sfx_gain=0.5, music_gain=0.42, duck=0.55, sfx_lowpass=None, sfx_skip=()),
+    'calm': dict(drift=0.5, punch=0.4, shake=0.15, blur=0.0, flash=0.3, glitch=False, cap_size=66,
+                 sfx_gain=0.3, music_gain=0.22, duck=0.7, sfx_lowpass=4500, sfx_skip=('tick', 'shimmer', 'glitch', 'marker')),
+}
+PROFILE = dict(PROFILES['standard'], name='standard')
+def set_profile(name):
+    if name not in PROFILES: raise ValueError(f'unknown profile {name}; use one of {list(PROFILES)}')
+    PROFILE.clear(); PROFILE.update(PROFILES[name]); PROFILE['name'] = name
+
 # ---------------- easing ----------------
 def clamp(x, a=0.0, b=1.0): return a if x < a else b if x > b else x
 def P(t, t0, d): return clamp((t - t0) / d) if d > 0 else (1.0 if t >= t0 else 0.0)
@@ -89,16 +104,17 @@ class Cam:
     punch = []; shake = []; extra = None
     s = 1.0; ox = 0.0; oy = 0.0
     def set(c, t):
-        sc = 1.025 + 0.018 * math.sin(2 * math.pi * t / 7.3)
-        ox = 9 * math.sin(2 * math.pi * t / 9.1)
-        oy = 7 * math.sin(2 * math.pi * t / 6.7 + 1)
+        dr = PROFILE['drift']
+        sc = 1.025 + 0.018 * dr * math.sin(2 * math.pi * t / 7.3)
+        ox = 9 * dr * math.sin(2 * math.pi * t / 9.1)
+        oy = 7 * dr * math.sin(2 * math.pi * t / 6.7 + 1)
         for t0, amt in c.punch:
             if t >= t0:
                 p = t - t0
-                sc += amt * eoexpo(clamp(p / 0.1)) * math.exp(-max(0.0, p - 0.1) * 2.0)
+                sc += amt * PROFILE['punch'] * eoexpo(clamp(p / 0.1)) * math.exp(-max(0.0, p - 0.1) * 2.0)
         for t0, amp, dur in c.shake:
             if t0 <= t < t0 + dur:
-                k = (1 - (t - t0) / dur) ** 2
+                k = (1 - (t - t0) / dur) ** 2 * PROFILE['shake']
                 ox += amp * k * math.sin(2 * math.pi * 23 * (t - t0))
                 oy += amp * k * math.cos(2 * math.pi * 19 * (t - t0) + .5)
         if c.extra: sc, ox, oy = c.extra(t, sc, ox, oy)

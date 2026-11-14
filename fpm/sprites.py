@@ -427,6 +427,7 @@ def crack_spr(prog):
     return cache(('crack', prog), mk)
 
 def glitch(im, off, seed):
+    if not PROFILE['glitch']: return im
     r, g, bb, a = im.split()
     out = Image.merge('RGBA', (ImageChops.offset(r, off, 0), g, ImageChops.offset(bb, -off, 0), a))
     rnd = random.Random(seed)
@@ -485,14 +486,16 @@ def brand_bug(dark_text, show='THE FINE PRINT', series='SCAM FILES'):
     return cache(('bug', dark_text, show, series), mk)
 
 def caption_spr(txt, kw):
+    size = PROFILE['cap_size']
     def mk():
-        fa = ('Bold', 52); f = F('Bold', 52 * SS)
-        w, h = f.getlength(txt) / SS + 72, 100
+        fa = ('Bold', size); f = F('Bold', size * SS)
+        pad = round(size * 0.7)
+        w, h = f.getlength(txt) / SS + 2 * pad, round(size * 1.92)
         im = canvas(w, h); p = Pen(im)
-        p.rr(0, 0, w, h, 26, fill=(10, 15, 30, 236))
-        x = 36; i = txt.find(kw) if kw else -1
+        p.rr(0, 0, w, h, h * 0.26, fill=(10, 15, 30, 236))
+        x = pad; i = txt.find(kw) if kw else -1
         parts = [(txt, WHITE)] if i < 0 else [(txt[:i], WHITE), (kw, ORANGE), (txt[i + len(kw):], WHITE)]
         for s, col in parts:
             if s: p.text(x, h / 2 + 2, s, fa, col, anchor='lm'); x += f.getlength(s) / SS
         return im
-    return cache(('cap', txt, kw), mk)
+    return cache(('cap', txt, kw, size), mk)
