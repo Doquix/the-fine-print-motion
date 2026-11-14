@@ -27,7 +27,7 @@ ffmpeg -hide_banner -loglevel error -y -i "$EP/video.mp4" -i "$EP/mix_raw.wav" \
 rm -f "$EP"/seg_*.mp4 "$EP/segs.txt"
 echo "== QC"
 ffmpeg -hide_banner -i "$OUT" -af ebur128=peak=true -f null - 2>&1 | grep -E "^\s+(I|Peak):" || true
-FZ=$(ffmpeg -hide_banner -i "$OUT" -vf "freezedetect=n=0.003:d=0.8" -map 0:v -f null - 2>&1 | grep -oE "freeze_duration: [0-9.]+" | awk '{s+=$2} END {printf "%.1f", s+0}')
+FZ=$(ffmpeg -hide_banner -i "$OUT" -vf "freezedetect=n=0.003:d=0.8" -map 0:v -f null - 2>&1 | { grep -oE "freeze_duration: [0-9.]+" || true; } | awk '{s+=$2} END {printf "%.1f", s+0}')
 echo "frozen time (>0.8s holds): ${FZ}s  (target < 2s)"
 ffmpeg -hide_banner -loglevel error -y -i "$OUT" -vf "fps=2,scale=180:320,tile=10x10" -frames:v 1 "$EP/qc_sheet.png"
 echo "done -> $OUT  (contact sheet: $EP/qc_sheet.png)"
