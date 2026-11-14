@@ -4,6 +4,7 @@ import sys, os, math
 import numpy as np, soundfile as sf
 from scipy.signal import butter, sosfilt, sawtooth
 from .timeline import Timeline
+from .engine import PROFILE
 
 SR = 48000
 rng = np.random.default_rng(11)
@@ -196,11 +197,14 @@ def main():
     for e in tl.events:
         if e[0] != 'sfx': continue
         _, t0, name, g, pan, kw = e
+        if name in PROFILE['sfx_skip']: continue
         x = SFX[name](**kw); i = int(t0 * SR)
         if i < 0 or i >= N: continue
         x = x[:N - i]
         l = math.cos((pan + 1) * math.pi / 4); r = math.sin((pan + 1) * math.pi / 4)
         sfx[i:i + len(x), 0] += x * g * l * 1.41; sfx[i:i + len(x), 1] += x * g * r * 1.41; n += 1
+    if PROFILE['sfx_lowpass']:   # keep SFX out of the range age related hearing loss hits first
+        sfx = np.stack([lp(sfx[:, 0], PROFILE['sfx_lowpass']), lp(sfx[:, 1], PROFILE['sfx_lowpass'])], 1)
     mus = build_music(tl, N)
     vo, sr = sf.read(tl.path(tl.beats.get('vo', 'vo_tight.flac')))
     if vo.ndim > 1: vo = vo.mean(axis=1)
@@ -210,11 +214,11 @@ def main():
     speech = np.abs(vo) > 1e-4
     vo = vo * (10 ** (-20 / 20) / np.sqrt(np.mean(vo[speech] ** 2)))
     env = np.sqrt(lp(vo ** 2, 8, 1).clip(0)); env = env / (np.percentile(env[speech], 90) + 1e-9)
-    duck = lp(1 - 0.55 * np.clip(env, 0, 1), 4, 1)
-    mix = vo[:, None] + mus * duck[:, None] * 0.42 + sfx * 0.5
+    duck = lp(1 - PROFILE['duck'] * np.clip(env, 0, 1), 4, 1)
+    mix = vo[:, None] + mus * duck[:, None] * PROFILE['music_gain'] + sfx * PROFILE['sfx_gain']
     out = tl.path('mix_raw.wav')
     sf.write(out, mix.astype(np.float32), SR, subtype='FLOAT')
-    print(f'sfx cues {n}, peak {np.max(np.abs(mix)):.2f} -> {out}')
+    print(f'profile {PROFILE["name"]}, sfx cues {n}, peak {np.max(np.abs(mix)):.2f} -> {out}')
 
 
 if __name__ == '__main__':

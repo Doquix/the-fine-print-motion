@@ -90,6 +90,29 @@ Card templates morph out of the previous card automatically (size, radius, color
 
 `tension`, `bait`, `dark`, `dark_plus`, `build` (ends in a kick roll), `hit` / `cut` / `silence`, `resolve`. A short `cut` before a big line makes it land.
 
+## Audience profiles
+
+Set `"profile"` at the top of `beats.json`. Default is `standard`.
+
+| | `standard` | `calm` (older viewers) |
+|---|---|---|
+| Camera drift | full | half |
+| Punch ins / shakes | full | 40% / 15% |
+| Motion blur on whips, glitch on stamps | on | off |
+| Flashes | full | 30% |
+| Captions | Inter Bold 52 | Inter Bold 66 |
+| Music under voice | 0.42, ducked 55% | 0.22, ducked 70% |
+| SFX | 0.5, full band | 0.3, low passed at 4.5 kHz, no tick / shimmer / glitch / marker |
+
+The profile only changes how things move and sound. Pacing comes from the beat sheet and the voiceover, so a `calm` episode also needs:
+
+* **Slower voice.** Generate the VO at about 0.9x speed and keep natural pauses: `python tools/prep.py vo.mp3 script.txt EP --keep 0.40 --dramatic 0.70`.
+* **Short captions.** About 22 characters per line or less, so the bigger captions don't get scaled back down.
+* **Longer holds.** Give each key visual 1.5 to 2.5 s, one idea per screen. The "something new every 0.5 to 0.8 s" rule below does not apply; the camera drift alone keeps the frame alive. QC target for frozen time stays under 2 s.
+* **Big details.** Crop in so the detail that matters (a web address, a sticker edge) fills most of the card width instead of sitting at 24 px inside a phone.
+* **A clear ending.** Finish with the action steps on screen for 3 to 4 s before the logo, and repeat the main point once.
+* **Gentle tone.** Prefer `tension` and `resolve` music moods; avoid stacking `build` + `hit` more than once per episode.
+
 ## Design rules (keep these when adding templates)
 
 1. Something new moves every 0.5 to 0.8 s; no hold over 1.2 s. QC target: under 2 s of frozen time.

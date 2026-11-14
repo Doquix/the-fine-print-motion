@@ -17,6 +17,7 @@ class Timeline:
     def __init__(self, beats_path):
         self.dir = os.path.dirname(os.path.abspath(beats_path))
         self.beats = B = json.load(open(beats_path))
+        set_profile(B.get('profile', 'standard'))
         self.caps = B['caps_inline'] if 'caps_inline' in B else json.load(open(self.path(B.get('captions', 'caps.json'))))
         self.dur = float(B['duration']) if 'duration' in B else self._vo_len() + 0.2
         self.show = B.get('show', 'THE FINE PRINT'); self.series = B.get('series', 'SCAM FILES')
@@ -65,8 +66,8 @@ class Timeline:
         for s in self.scenes: self.events += s.events()
         CAM.punch = [(e[1], e[2]) for e in self.events if e[0] == 'punch']
         CAM.shake = [(e[1], e[2], e[3]) for e in self.events if e[0] == 'shake']
-        self.flashes = [e[1:] for e in self.events if e[0] == 'flash']
-        self.blurs = [e[1:] for e in self.events if e[0] == 'blur']
+        self.flashes = [(t0, col, amax * PROFILE['flash'], d) for t0, col, amax, d in (e[1:] for e in self.events if e[0] == 'flash')]
+        self.blurs = [(t0, d, a * PROFILE['blur']) for t0, d, a in (e[1:] for e in self.events if e[0] == 'blur')]
         self.creeps = [e[1:] for e in self.events if e[0] == 'creep']
         z = [e[1:] for e in self.events if e[0] == 'zoom']
         self.zoom = z[-1] if z else None
