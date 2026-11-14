@@ -190,7 +190,7 @@ def phone_frame(dim=0.0):
         im = canvas(PW + 12, PH); p = Pen(im)
         p.rr(0, 160, 10, 230, 4, fill=(30, 34, 46)); p.rr(PW + 2, 200, PW + 12, 300, 4, fill=(30, 34, 46))
         p.rr(6, 0, PW + 6, PH, 66, fill=(16, 20, 30))
-        p.rr(10, 4, PW + 2, PH - 4, 62, outline=(70, 78, 96), width=3)
+        p.rr(10, 4, PW + 2, PH - 4, 62, outline=(132, 142, 164), width=4)
         return im
     return cache(('pf', dim), mk)
 

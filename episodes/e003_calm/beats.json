@@ -63,7 +63,7 @@
   },
   {
    "t": "qr_peel",
-   "start": "c4-0.1",
+   "start": "c4-0.35",
    "bg": "navy",
    "bg_mode": "fade",
    "bg_dur": 0.6,
@@ -77,7 +77,7 @@
   },
   {
    "t": "qr_fake",
-   "start": "c11-0.1",
+   "start": "c11-0.35",
    "bg": "purple",
    "bg_mode": "fade",
    "bg_dur": 0.6,
@@ -88,7 +88,7 @@
   },
   {
    "t": "qr_capture",
-   "start": "c13-0.15",
+   "start": "c13-0.35",
    "bg": "redwarn",
    "bg_mode": "fade",
    "bg_dur": 0.6,
@@ -102,19 +102,19 @@
   },
   {
    "t": "qr_covered",
-   "start": "c18-0.15",
+   "start": "c18-0.35",
    "bg": "paper",
    "bg_mode": "fade",
    "bg_dur": 0.6,
    "p": {
     "covered": "c19",
-    "phone": "c19e-0.25",
-    "close": "w20:close+0.15"
+    "phone": "c19e-0.05",
+    "close": "c20+0.35"
    }
   },
   {
    "t": "qr_lookup",
-   "start": "c21-0.15",
+   "start": "c21-0.1",
    "p": {
     "typed": "c22e-0.2",
     "official": "w23:official",
@@ -124,7 +124,7 @@
   },
   {
    "t": "qr_checklist",
-   "start": "c25-0.15",
+   "start": "c25-0.35",
    "bg": "navy",
    "bg_mode": "fade",
    "bg_dur": 0.6,

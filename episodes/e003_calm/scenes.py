@@ -10,8 +10,8 @@ from PIL import Image
 from fpm.templates.base import *
 import qr_sprites as S
 
-ENTER, EXIT = 0.6, 0.45
-DELAY = 0.3   # incoming scene waits for the outgoing one to clear (no double exposure)
+ENTER, EXIT = 0.6, 0.38
+DELAY = 0.12  # incoming scene waits for the outgoing one to clear (no double exposure)
 PHX, PHY = CX, 830
 
 
@@ -215,8 +215,11 @@ class QrScan(Scene):
         p = self.p
         m = eio(P(t, p['morph'], 0.6))
         g = 0.82 + 0.04 * P(t, 0, p['morph'])               # slow push
-        gx, gy = CX, 800
+        gx, gy = CX, 845
         draw_meter(b, gx, gy, g * (1 + 0.5 * m), 0, 1 - m)
+        # hook: say what this is in the very first frame (also the thumbnail frame)
+        put(b, S.tag('SCAM ALERT  ·  PARKING QR CODES', ORANGE, INK, 30), CX, 368 - 30 * eio(P(t, p['morph'] - .3, .4)), 1.0,
+            1 - eio(P(t, p['morph'] - .3, .4)))
         sx, sy = gx, gy + S.METER_STICK_DY * g
         lk = eo3(P(t, p['lock'], 0.45))
         put(b, S.brackets(lerp(430, 340, lk) * g / 0.82, GREEN if t >= p['lock'] else WHITE), sx, sy, 1.0, ein(t, 0.15, 0.4) * (1 - m))
@@ -227,7 +230,7 @@ class QrScan(Scene):
         if t >= p['pill']:
             pill = S.link_pill('citypark-pay.co')
             pw, ph = pill.width / SS, pill.height / SS
-            px, py = CX, 1210
+            px, py = CX, 1255
             if m <= 0:
                 put(b, pill, px, py + 40 * (1 - ein(t, p['pill'], .5)), 1.0, ein(t, p['pill'], .4))
                 if t >= p['tap']: put(b, S.ripple(P(t, p['tap'], 0.6)), px + 130, py, 1.0)
@@ -370,7 +373,7 @@ class QrCapture(Scene):
         sw = eio(P(t, p['status'], 0.8))                       # swap to the status card
         n = int(16 * P(t, self.start + 0.5, p['type_end'] - self.start - 0.5))
         a1 = clamp(k * 1.5) * (1 - sw)
-        y1 = lerp(820, 520, eio(P(t, p['scammer'] - 0.1, 0.7))) + 60 * (1 - k) - 200 * sw
+        y1 = lerp(470, 520, eio(P(t, p['scammer'] - 0.1, 0.7))) + 60 * (1 - k) - 200 * sw
         draw_card(b, CX, y1, CW_, 250, 34, CARD, [(number_callout(n, int(t * 2.2) % 2 == 0), 1)], 1.0, a1)
         if t >= p['scammer']:
             ys = 1000 - 200 * sw; q = ein(t, p['scammer'] + 0.2, 0.6)
@@ -428,14 +431,14 @@ class QrCovered(Scene):
             y = lerp(1500, 860, ph) - 120 * out
             a = clamp(ph * 1.5) * (1 - out)
             xb = soft_pop(t, p['close'], .4)
-            col = eio(P(t, p['close'] + .6, 0.5))
+            col = eio(P(t, p['close'] + .45, 0.4))
             sc = 1.0
             pay = S.pay_screen(1, 0, 0, 1, False, xb)
-            closed = S.closed_screen(P(t, p['close'] + .9, .5))
+            closed = S.closed_screen(P(t, p['close'] + .65, .4))
             def ex():
                 X, Y = scr(PHX, y, sc, S.SW - 52, 94)
                 if col > 0: put(b, pay, lerp(PHX, X, col), lerp(y, Y, col), 1 - 0.85 * col, a * (1 - col))
-                if t >= p['close'] + .3: put(b, S.ripple(P(t, p['close'] + .3, .6)), X, Y, 1.0, a)
+                if t >= p['close'] + .25: put(b, S.ripple(P(t, p['close'] + .25, .5)), X, Y, 1.0, a)
             draw_phone(b, PHX, y, sc, closed if col > 0 else pay, a, ex)
 
     def events(self):
@@ -443,8 +446,8 @@ class QrCovered(Scene):
         return [('sfx', self.start, 'whoosh', .5, 0, dict(d=.6, f0=300, f1=1500, g=.25)),
                 ('sfx', p['covered'] + .2, 'pop', .6, 0, {}),
                 ('sfx', p['phone'], 'whoosh', .5, 0, dict(d=.6, f0=300, f1=1500, g=.25)),
-                ('sfx', p['close'], 'pop', .6, 0, dict(p=1.2)), ('sfx', p['close'] + .3, 'tap', .9, 0, {}),
-                ('sfx', p['close'] + .6, 'whoosh', .4, 0, dict(d=.4, f0=2000, f1=400, g=.2)), ('sfx', p['close'] + .9, 'chime', .7, 0, {})]
+                ('sfx', p['close'], 'pop', .6, 0, dict(p=1.2)), ('sfx', p['close'] + .25, 'tap', .9, 0, {}),
+                ('sfx', p['close'] + .45, 'whoosh', .4, 0, dict(d=.4, f0=2000, f1=400, g=.2)), ('sfx', p['close'] + .65, 'chime', .7, 0, {})]
 
 
 class QrLookup(Scene):
