@@ -1,0 +1,170 @@
+[
+{
+"s": 0.05,
+"e": 0.9,
+"t": "You scan the code",
+"k": "code"
+},
+{
+"s": 0.9,
+"e": 1.85,
+"t": "to pay for parking.",
+"k": "parking"
+},
+{
+"s": 2.25,
+"e": 3.18,
+"t": "The page asks for",
+"k": ""
+},
+{
+"s": 3.18,
+"e": 4.08,
+"t": "your card number.",
+"k": "card number"
+},
+{
+"s": 4.48,
+"e": 5.23,
+"t": "Then you look back",
+"k": ""
+},
+{
+"s": 5.29,
+"e": 6.02,
+"t": "at the meter",
+"k": "meter"
+},
+{
+"s": 6.02,
+"e": 7.12,
+"t": "and notice a corner",
+"k": "corner"
+},
+{
+"s": 7.12,
+"e": 7.78,
+"t": "peeling up.",
+"k": "peeling up"
+},
+{
+"s": 8.18,
+"e": 9.47,
+"t": "There's another QR code",
+"k": "another"
+},
+{
+"s": 9.47,
+"e": 10.14,
+"t": "underneath.",
+"k": "underneath"
+},
+{
+"s": 10.54,
+"e": 11.49,
+"t": "That top sticker",
+"k": "top sticker"
+},
+{
+"s": 11.49,
+"e": 12.14,
+"t": "can send you",
+"k": ""
+},
+{
+"s": 12.14,
+"e": 13.44,
+"t": "to a fake payment page.",
+"k": "fake"
+},
+{
+"s": 13.81,
+"e": 15.09,
+"t": "Type in your card number",
+"k": "card number"
+},
+{
+"s": 15.09,
+"e": 15.84,
+"t": "and the scammer",
+"k": "scammer"
+},
+{
+"s": 15.84,
+"e": 16.84,
+"t": "can get your details",
+"k": "details"
+},
+{
+"s": 16.84,
+"e": 17.76,
+"t": "while your parking",
+"k": ""
+},
+{
+"s": 17.81,
+"e": 18.64,
+"t": "is still unpaid.",
+"k": "unpaid"
+},
+{
+"s": 19.06,
+"e": 20.09,
+"t": "If the code looks",
+"k": ""
+},
+{
+"s": 20.09,
+"e": 20.9,
+"t": "covered up,",
+"k": "covered up"
+},
+{
+"s": 21.16,
+"e": 22.2,
+"t": "close the page.",
+"k": "close"
+},
+{
+"s": 22.57,
+"e": 23.54,
+"t": "Look up the city",
+"k": "city"
+},
+{
+"s": 23.54,
+"e": 24.69,
+"t": "or parking operator's",
+"k": "operator's"
+},
+{
+"s": 24.69,
+"e": 25.84,
+"t": "official payment app",
+"k": "official"
+},
+{
+"s": 25.84,
+"e": 26.92,
+"t": "or website yourself.",
+"k": "website"
+},
+{
+"s": 27.28,
+"e": 28.14,
+"t": "Before you pay,",
+"k": "pay"
+},
+{
+"s": 28.34,
+"e": 29.34,
+"t": "check where that code",
+"k": "code"
+},
+{
+"s": 29.34,
+"e": 29.91,
+"t": "is taking you.",
+"k": ""
+}
+]

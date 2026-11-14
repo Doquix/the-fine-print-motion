@@ -124,6 +124,10 @@ The profile only changes how things move and sound. Pacing comes from the beat s
 7. Safe layout: brand bug at y 222, content between y 330 and 1340, captions at y 1430, cards 880 px wide.
 8. Outro about 3 s, then fade to navy so the video loops.
 
+## Episode specific scenes
+
+One off visuals can live in the episode folder: list them in `beats.json` as `"modules": ["scenes.py"]`. Every `Scene` subclass with a `name` in those files becomes a template for that episode only (sibling files such as `qr_sprites.py` can be imported). Move a scene into `fpm/templates/` once a second episode needs it. See `episodes/e003_calm`.
+
 ## Adding a template
 
 1. Add a class in `fpm/templates/` (subclass `CardScene` for single card scenes, `Scene` for anything else).
@@ -147,6 +151,7 @@ tools/library_sheet.py template catalog image
 tools/gen_docs.py      docs/TEMPLATES.md
 build.sh               end to end build with QC
 episodes/e001/         Task scams (reference episode)
+episodes/e003_calm/    QR code parking scam, calm profile, episode specific scenes
 ```
 
 ## Known limits

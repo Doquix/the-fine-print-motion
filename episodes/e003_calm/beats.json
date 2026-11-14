@@ -1,0 +1,148 @@
+{
+ "episode": "E003",
+ "title": "QR code parking scam (calm)",
+ "show": "THE FINE PRINT",
+ "series": "SCAM FILES",
+ "profile": "calm",
+ "vo": "vo_tight.flac",
+ "captions": "caps.json",
+ "modules": [
+  "scenes.py"
+ ],
+ "duration": 36.31,
+ "hide_captions": [
+  "Before you pay,"
+ ],
+ "music": [
+  [
+   0,
+   "tension"
+  ],
+  [
+   "c2",
+   "bait"
+  ],
+  [
+   "c4-0.1",
+   "tension"
+  ],
+  [
+   "w8:another-0.35",
+   "cut"
+  ],
+  [
+   "w8:another",
+   "dark"
+  ],
+  [
+   "c18-0.15",
+   "resolve"
+  ]
+ ],
+ "scenes": [
+  {
+   "t": "qr_scan",
+   "start": 0,
+   "bg": "navy",
+   "p": {
+    "lock": "w0:code",
+    "pill": "c1",
+    "tap": "w1:parking",
+    "morph": "c1e-0.1"
+   }
+  },
+  {
+   "t": "qr_pay_page",
+   "start": "c2+0.2",
+   "bg": "cream",
+   "bg_mode": "fade",
+   "bg_dur": 0.6,
+   "p": {
+    "field": "w3:card"
+   }
+  },
+  {
+   "t": "qr_peel",
+   "start": "c4-0.1",
+   "bg": "navy",
+   "bg_mode": "fade",
+   "bg_dur": 0.6,
+   "p": {
+    "corner": "w6:corner",
+    "peel": "c7",
+    "reveal": "w8:another",
+    "qr": "w8:QR code",
+    "top": "c10+0.05"
+   }
+  },
+  {
+   "t": "qr_fake",
+   "start": "c11-0.1",
+   "bg": "purple",
+   "bg_mode": "fade",
+   "bg_dur": 0.6,
+   "p": {
+    "lift": "c11+0.3",
+    "stamp": "w12:fake"
+   }
+  },
+  {
+   "t": "qr_capture",
+   "start": "c13-0.15",
+   "bg": "redwarn",
+   "bg_mode": "fade",
+   "bg_dur": 0.6,
+   "p": {
+    "type_end": "c13e-0.1",
+    "scammer": "w14:scammer",
+    "details": "w15:details",
+    "status": "c16",
+    "unpaid": "w17:unpaid"
+   }
+  },
+  {
+   "t": "qr_covered",
+   "start": "c18-0.15",
+   "bg": "paper",
+   "bg_mode": "fade",
+   "bg_dur": 0.6,
+   "p": {
+    "covered": "c19",
+    "phone": "c19e-0.25",
+    "close": "w20:close+0.15"
+   }
+  },
+  {
+   "t": "qr_lookup",
+   "start": "c21-0.15",
+   "p": {
+    "typed": "c22e-0.2",
+    "official": "w23:official",
+    "web": "w24:website",
+    "yourself": "w24:yourself"
+   }
+  },
+  {
+   "t": "qr_checklist",
+   "start": "c25-0.15",
+   "bg": "navy",
+   "bg_mode": "fade",
+   "bg_dur": 0.6,
+   "p": {
+    "rows": [
+     "c26",
+     "c27",
+     "c27e+0.7"
+    ]
+   }
+  },
+  {
+   "t": "logo_outro",
+   "start": 33.31,
+   "p": {
+    "tag": 33.910000000000004,
+    "tagline": "Check the link before you pay."
+   }
+  }
+ ]
+}

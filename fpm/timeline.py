@@ -22,9 +22,11 @@ class Timeline:
         self.dur = float(B['duration']) if 'duration' in B else self._vo_len() + 0.2
         self.show = B.get('show', 'THE FINE PRINT'); self.series = B.get('series', 'SCAM FILES')
         self.now = 0.0
+        self.registry = dict(REGISTRY)
+        self._load_modules(B.get('modules', []))
         self.scenes = []
         for sp in B['scenes']:
-            cls = REGISTRY[sp['t']]
+            cls = self.registry[sp['t']]
             self.scenes.append(cls(sp, self))
         for i, s in enumerate(self.scenes):
             s.prev = self.scenes[i - 1] if i else None
@@ -32,6 +34,19 @@ class Timeline:
             s.end = s.next.start if s.next else self.dur
         for s in self.scenes: s.resolve()
         self.compile()
+
+    def _load_modules(self, mods):
+        """Episode specific scenes: "modules": ["scenes.py"] in beats.json. Every Scene subclass
+        with a name in those files becomes usable as a template in this episode only."""
+        import importlib.util, sys
+        from .templates.base import Scene
+        if mods and self.dir not in sys.path: sys.path.insert(0, self.dir)
+        for m in mods:
+            spec = importlib.util.spec_from_file_location(os.path.splitext(os.path.basename(m))[0], self.path(m))
+            mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+            for v in vars(mod).values():
+                if isinstance(v, type) and issubclass(v, Scene) and v is not Scene and getattr(v, 'name', 'scene') != 'scene':
+                    self.registry[v.name] = v
 
     def path(self, p): return p if os.path.isabs(p) else os.path.join(self.dir, p)
 
@@ -76,7 +91,7 @@ class Timeline:
                 if t0 < t < t1: sc += amt * eio(P(t, t0, t1 - t0))
                 elif t1 <= t < t2 + .1: sc += amt
             if self.zoom and t > self.zoom[0]:
-                q = ei3(P(t, self.zoom[0], self.zoom[1] - self.zoom[0])); sc *= 1 + 5 * q; oy += 500 * q
+                q = ei3(P(t, self.zoom[0], self.zoom[1] - self.zoom[0])) * PROFILE['outro_zoom']; sc *= 1 + 5 * q; oy += 500 * q
             return sc, ox, oy
         CAM.extra = extra
         # backgrounds
@@ -145,7 +160,7 @@ class Timeline:
         amt = 0
         for t0, d, a in self.blurs:
             if t0 <= t < t0 + d: amt = max(amt, math.sin(math.pi * P(t, t0, d)) * a)
-        if self.zoom and t > self.zoom[0]: amt = max(amt, 70 * P(t, self.zoom[0], self.zoom[1] - self.zoom[0]))
+        if self.zoom and t > self.zoom[0]: amt = max(amt, 70 * PROFILE['blur'] * P(t, self.zoom[0], self.zoom[1] - self.zoom[0]))
         if amt >= 2:
             a = np.asarray(img).astype(np.float32); acc = a.copy()
             for k in range(1, 6): acc += np.roll(a, int(amt * k / 5), axis=0)

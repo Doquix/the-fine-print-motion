@@ -1,0 +1,28 @@
+c0      0.05    0.90  You scan the code
+c1      0.90    1.85  to pay for parking.
+c2      2.25    3.18  The page asks for
+c3      3.18    4.08  your card number.
+c4      4.48    5.23  Then you look back
+c5      5.29    6.02  at the meter
+c6      6.02    7.12  and notice a corner
+c7      7.12    7.78  peeling up.
+c8      8.18    9.47  There's another QR code
+c9      9.47   10.14  underneath.
+c10    10.54   11.49  That top sticker
+c11    11.49   12.14  can send you
+c12    12.14   13.44  to a fake payment page.
+c13    13.81   15.09  Type in your card number
+c14    15.09   15.84  and the scammer
+c15    15.84   16.84  can get your details
+c16    16.84   17.76  while your parking
+c17    17.81   18.64  is still unpaid.
+c18    19.06   20.09  If the code looks
+c19    20.09   20.90  covered up,
+c20    21.16   22.20  close the page.
+c21    22.57   23.54  Look up the city
+c22    23.54   24.69  or parking operator's
+c23    24.69   25.84  official payment app
+c24    25.84   26.92  or website yourself.
+c25    27.28   28.14  Before you pay,
+c26    28.34   29.34  check where that code
+c27    29.34   29.91  is taking you.

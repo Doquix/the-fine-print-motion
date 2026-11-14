@@ -18,9 +18,9 @@ GOLD = (240, 168, 40)
 # gentler camera, no glitch or motion blur, softer flashes, bigger captions,
 # and a mix with less music, fewer high frequency SFX and more voice.
 PROFILES = {
-    'standard': dict(drift=1.0, punch=1.0, shake=1.0, blur=1.0, flash=1.0, glitch=True, cap_size=52,
+    'standard': dict(drift=1.0, punch=1.0, shake=1.0, blur=1.0, flash=1.0, glitch=True, outro_zoom=1.0, cap_size=52,
                      sfx_gain=0.5, music_gain=0.42, duck=0.55, sfx_lowpass=None, sfx_skip=()),
-    'calm': dict(drift=0.5, punch=0.4, shake=0.15, blur=0.0, flash=0.3, glitch=False, cap_size=66,
+    'calm': dict(drift=0.5, punch=0.4, shake=0.15, blur=0.0, flash=0.3, glitch=False, outro_zoom=0.12, cap_size=66,
                  sfx_gain=0.3, music_gain=0.22, duck=0.7, sfx_lowpass=4500, sfx_skip=('tick', 'shimmer', 'glitch', 'marker')),
 }
 PROFILE = dict(PROFILES['standard'], name='standard')
